@@ -54,7 +54,7 @@ public class DBHelper extends SQLiteOpenHelper {
             insertThemeProperty(db, "Фрукты и овощи", "11");
             insertThemeProperty(db, "Еда", "13");
             insertThemeProperty(db, "Школа", "10");
-            insertThemeProperty(db, "Погода и природа", "15");
+            insertThemeProperty(db, "Погода и природа", "16");
             insertThemeProperty(db, "Животные", "10");
 
             db.execSQL("CREATE TABLE LESSON(_id INTEGER PRIMARY KEY AUTOINCREMENT, "
