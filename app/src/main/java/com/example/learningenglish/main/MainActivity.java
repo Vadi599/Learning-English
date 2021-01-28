@@ -1,37 +1,34 @@
 package com.example.learningenglish.main;
 
-import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
-import android.os.Parcel;
-import android.os.Parcelable;
 import android.widget.Toast;
 
 import com.example.learningenglish.R;
 import com.example.learningenglish.adapter.CategoryAdapter;
-import com.example.learningenglish.adapter.OnItemClickListener;
 import com.example.learningenglish.model.Category;
-import com.example.learningenglish.model.CategoryEntity;
 import com.example.learningenglish.model.ThemeProperty;
 import com.example.learningenglish.selection_menu.SelectionMenuFragment;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity implements MainContract.View {
+public class MainActivity extends FragmentActivity implements MainContract.View {
+
     List<Category> categories;
     RecyclerView recyclerView;
     CategoryAdapter adapter;
     MainPresenter presenter;
-    CategoryEntity categoryEntity;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         recyclerView = (RecyclerView) findViewById(R.id.rvCategories);
         categories = new ArrayList<>();
         categories.add(new Category("Семья и друзья", R.drawable.family_and_friends));
@@ -66,15 +63,10 @@ public class MainActivity extends AppCompatActivity implements MainContract.View
     public void showSelectionMenu(ThemeProperty property) {
         Bundle bundle = new Bundle();
         bundle.putInt("themeId", property.getId());
-        bundle.putSerializable("categoryEntity", categoryEntity);
-        /*bundle.putInt("entityId", categoryEntity.getId());
-        bundle.putInt("imageResourceId",categoryEntity.getImageResourceId());
-        bundle.putString("word_ru",categoryEntity.getWord_ru());
-        bundle.putString("word_en",categoryEntity.getWord_en());*/
         SelectionMenuFragment fragment = new SelectionMenuFragment();
         fragment.setArguments(bundle);
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        transaction.replace(R.id.container, fragment);
+        transaction.add(R.id.container, fragment);
         transaction.addToBackStack(null);
         transaction.commit();
     }

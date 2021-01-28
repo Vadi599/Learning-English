@@ -9,11 +9,13 @@ import com.example.learningenglish.repository.theme_property.ThemePropertyReposi
 
 import java.util.List;
 
-import repository_category_entity.CategoryEntityRepository;
-import repository_category_entity.ICategoryEntityRepository;
+import com.example.learningenglish.repository_category_entity.CategoryEntityRepository;
+import com.example.learningenglish.repository_category_entity.ICategoryEntityRepository;
+import com.example.learningenglish.model.ResourcesOfCategory;
 
 
 public class SelectionMenuPresenter implements SelectionMenuContract.Presenter {
+
     private IThemePropertyRepository repository;
     private SelectionMenuContract.View view;
     private ICategoryEntityRepository categoryEntityRepository;
@@ -41,6 +43,16 @@ public class SelectionMenuPresenter implements SelectionMenuContract.Presenter {
             view.showMessage("Нет данных в БД.");
         } else {
             view.showCategoryEntities(categoryEntities);
+        }
+    }
+
+    @Override
+    public void getResourcesFromDatabase(String category) {
+        List<ResourcesOfCategory> resourceList = categoryEntityRepository.getResource(category);
+        if (resourceList == null) {
+            view.showMessage("Нет ресурсов в БД.");
+        } else {
+            view.showResources(resourceList);
         }
     }
 }

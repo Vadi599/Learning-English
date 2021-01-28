@@ -1,69 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
     android:padding="16dp"
-    android:orientation="vertical"
-    tools:context=".lessons.LessonFragment">
+    android:clickable="true"
+    android:background="@color/white"
+    tools:context=".lesson.LessonFragment">
 
-    <ImageView
-        android:id="@+id/ivPicture"
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/pager"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="match_parent" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
+    <Button
+        android:id="@+id/btn_back"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:orientation="horizontal">
+        android:layout_gravity="bottom|start"
+        android:layout_marginStart="10dp"
+        android:text="Назад" />
 
-        <TextView
-            android:id="@+id/tvWord"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="50dp"
-            tools:text="сахар"
-            android:textSize="20dp" />
-
-        <TextView
-            android:id="@+id/tvTransfer"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="175dp"
-            tools:text="sugar"
-            android:textSize="20dp" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
+    <Button
+        android:id="@+id/btn_pronunciation"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="40sp"
-        android:orientation="horizontal">
+        android:layout_gravity="bottom"
+        android:layout_marginStart="110dp"
+        android:text="произношение" />
 
-        <Button
-            android:id="@+id/btn_back"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:text="Назад" />
+    <Button
+        android:id="@+id/btn_forward"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_marginStart="260dp"
+        android:text="вперед" />
 
-        <Button
-            android:id="@+id/btn_pronunciation"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:text="произношение" />
-
-        <Button
-            android:id="@+id/btn_forward"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:text="вперед" />
-
-    </LinearLayout>
-</LinearLayout>
+</FrameLayout>

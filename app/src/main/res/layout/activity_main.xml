@@ -10,7 +10,6 @@
     android:orientation="vertical"
     tools:context=".main.MainActivity">
 
-    
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvCategories"
         android:layout_width="match_parent"
@@ -26,5 +25,5 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 
-
 </androidx.constraintlayout.widget.ConstraintLayout>
+

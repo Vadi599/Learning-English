@@ -10,9 +10,6 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Design.Light.NoActionBar">
         <activity
-            android:name=".selection_menu.SelectionMenuActivity"
-            android:configChanges="orientation|screenSize|keyboardHidden" />
-        <activity
             android:name=".main.MainActivity"
             android:configChanges="orientation|screenSize|keyboardHidden">
             <intent-filter>

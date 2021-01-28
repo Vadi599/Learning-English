@@ -12,7 +12,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.learningenglish.model.Category;
 import com.example.learningenglish.R;
-import com.example.learningenglish.model.CategoryEntity;
 import com.example.learningenglish.model.ThemeProperty;
 
 import java.util.ArrayList;
@@ -52,11 +51,6 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
     }
 
     List<Category> categories;
-
-    public void setCategoryList(List<Category> categories) {
-        this.categories = categories;
-        notifyDataSetChanged();
-    }
 
     public CategoryAdapter(List<Category> categories) {
         this.categories = categories;

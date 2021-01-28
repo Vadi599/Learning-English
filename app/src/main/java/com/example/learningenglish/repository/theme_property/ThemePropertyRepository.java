@@ -3,10 +3,8 @@ package com.example.learningenglish.repository.theme_property;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-
 import com.example.learningenglish.DBHelper;
 import com.example.learningenglish.model.ThemeProperty;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,6 +27,7 @@ public class ThemePropertyRepository implements IThemePropertyRepository {
             String typeOfTheme = cursor.getString(0);
             String countOfWords = cursor.getString(1);
             ThemeProperty themeProperty = new ThemeProperty(themeId, typeOfTheme, countOfWords);
+            cursor.close();
             return themeProperty;
         } else {
             return null;

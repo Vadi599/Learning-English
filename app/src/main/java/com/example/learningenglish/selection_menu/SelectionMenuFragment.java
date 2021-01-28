@@ -5,7 +5,6 @@ import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
-import android.os.Parcel;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,9 +13,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.learningenglish.R;
-import com.example.learningenglish.lessons.LessonFragment;
 import com.example.learningenglish.model.CategoryEntity;
 import com.example.learningenglish.model.ThemeProperty;
+import com.example.learningenglish.lesson.LessonFragment;
+import com.example.learningenglish.model.ResourcesOfCategory;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,11 +32,15 @@ public class SelectionMenuFragment extends Fragment implements SelectionMenuCont
     SelectionMenuPresenter presenter;
     Button btnLesson;
     CategoryEntity categoryEntity;
-    private List<CategoryEntity> entities = new ArrayList<>();
+    String category;
 
-    public List<CategoryEntity> getEntities() {
-        return entities;
+    List<ResourcesOfCategory> resources = new ArrayList<>();
+
+    public void setResources(List<ResourcesOfCategory> resources) {
+        this.resources = resources;
     }
+
+    private List<CategoryEntity> entities = new ArrayList<>();
 
     public void setEntities(List<CategoryEntity> entities) {
         this.entities = entities;
@@ -76,6 +80,7 @@ public class SelectionMenuFragment extends Fragment implements SelectionMenuCont
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         /* btnLesson = (Button) findViewById(R.id.btn_start_learning);*/
        /* if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
@@ -89,15 +94,43 @@ public class SelectionMenuFragment extends Fragment implements SelectionMenuCont
         presenter = new SelectionMenuPresenter(this, getContext());
         int themeId = getArguments().getInt("themeId");
         // Inflate the layout for this fragment
-        fragmentView = inflater.inflate(R.layout.fragment_selection_menu, container, false);
-        /*int entityId = getArguments().getInt("entityId");
-        int imageResourceId = getArguments().getInt("imageResourceId");
-        String word_ru = getArguments().getString("word_ru");
-        String word_en = getArguments().getString("word_en");
-        categoryEntity = new CategoryEntity(entityId, imageResourceId, word_ru, word_en);*/
-        getArguments().getSerializable("categoryEntity");
+        fragmentView = inflater.inflate(R.layout.fragment_selection_menu, null);
+        switch (themeId) {
+            case 1:
+                category = "Семья и друзья";
+                break;
+            case 2:
+                category = "Части тела";
+                break;
+            case 3:
+                category = "Одежда";
+                break;
+            case 4:
+                category = "Цифры";
+                break;
+            case 5:
+                category = "Цвета";
+                break;
+            case 6:
+                category = "Фрукты и овощи";
+                break;
+            case 7:
+                category = "Еда";
+                break;
+            case 8:
+                category = "Школа";
+                break;
+            case 9:
+                category = "Погода и природа";
+                break;
+            case 10:
+                category = "Животные";
+                break;
+        }
+        categoryEntity = new CategoryEntity(category);
         presenter.getThemePropertyFromDatabase(themeId);
-        presenter.getDataFromDatabase();
+        /* presenter.getDataFromDatabase();*/
+        presenter.getResourcesFromDatabase(category);
         btnLesson = (Button) fragmentView.findViewById(R.id.btn_start_learning);
         btnLesson.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -124,7 +157,7 @@ public class SelectionMenuFragment extends Fragment implements SelectionMenuCont
     @Override
     public void showLesson(CategoryEntity categoryEntity) {
         Bundle bundle = new Bundle();
-        bundle.putInt("entityId", categoryEntity.getId());
+        bundle.putString("category", categoryEntity.getCategory());
         FragmentManager fragmentManager = getFragmentManager();
         LessonFragment fragment = new LessonFragment();
         fragment.setArguments(bundle);
@@ -138,5 +171,10 @@ public class SelectionMenuFragment extends Fragment implements SelectionMenuCont
     @Override
     public void showCategoryEntities(List<CategoryEntity> entities) {
         setEntities(entities);
+    }
+
+    @Override
+    public void showResources(List<ResourcesOfCategory> resources) {
+        setResources(resources);
     }
 }
