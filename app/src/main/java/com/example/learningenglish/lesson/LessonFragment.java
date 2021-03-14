@@ -1,8 +1,11 @@
 package com.example.learningenglish.lesson;
 
+import android.media.MediaPlayer;
 import android.os.Bundle;
+
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.fragment.app.FragmentStatePagerAdapter;
 import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
@@ -17,6 +20,7 @@ import com.example.learningenglish.model.ResourcesOfCategory;
 import com.example.learningenglish.repository_category_entity.CategoryEntityRepository;
 import com.example.learningenglish.repository_category_entity.ICategoryEntityRepository;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -110,6 +114,7 @@ public class LessonFragment extends Fragment {
                 }
             }
         });
+
         pager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
 
             @Override
@@ -117,7 +122,6 @@ public class LessonFragment extends Fragment {
                 int totalItems = pager.getAdapter().getCount();
                 if (position == 0) {
                     back.setEnabled(false);
-
                 } else {
                     back.setEnabled(true);
                 }
@@ -144,7 +148,7 @@ public class LessonFragment extends Fragment {
 
         ArrayList<Fragment> fragments = new ArrayList<>();
 
-        ICategoryEntityRepository categoryEntityRepository = new CategoryEntityRepository(getContext());
+        CategoryEntityRepository categoryEntityRepository = new CategoryEntityRepository(getContext());
 
         public MyFragmentPagerAdapter(FragmentManager fm, String category) {
             super(fm);

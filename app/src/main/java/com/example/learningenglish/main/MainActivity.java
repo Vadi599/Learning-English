@@ -42,8 +42,9 @@ public class MainActivity extends FragmentActivity implements MainContract.View 
         categories.add(new Category("Погода и природа", R.drawable.weather));
         categories.add(new Category("Животные", R.drawable.animals));
         adapter = new CategoryAdapter(categories);
-        recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new GridLayoutManager(this, 2));
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setAdapter(adapter);
         presenter = new MainPresenter(this, getBaseContext());
         presenter.getDataFromDatabase();
         adapter.setOnItemClickListener(this::showSelectionMenu);
